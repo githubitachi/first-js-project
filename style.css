@@ -1,0 +1,56 @@
+ body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .choices {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .choice {
+      padding: 1rem 2rem;
+      background-color: #2980b9;
+      border: none;
+      border-radius: 10px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .choice:hover {
+      background-color: #1abc9c;
+      transform: scale(1.1);
+    }
+
+    .result, .score, .final {
+      font-size: 1.5rem;
+      margin: 0.5rem;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .final {
+      font-size: 2rem;
+      margin-top: 1rem;
+      color: #ffd700;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
