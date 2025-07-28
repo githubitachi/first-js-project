@@ -58,7 +58,6 @@ function displayFinalResult() {
     finalDiv.textContent = "🤝 Game Over: It's a draw!";
   }
 
-
   document.querySelectorAll('.choice').forEach(btn => {
     btn.disabled = true;
     btn.style.opacity = 0.5;
@@ -83,29 +82,6 @@ function resetGame() {
   });
 }
 
-playAgainBtn.addEventListener('click', resetGame);
-
-document.querySelectorAll('.choice').forEach(btn => {
-  btn.classList.remove('active');
-});
-const clickedBtn = [...document.querySelectorAll('.choice')].find(btn => btn.innerText.includes(playerChoice[0].toUpperCase()));
-if (clickedBtn) {
-  clickedBtn.classList.add('active');
-  setTimeout(() => clickedBtn.classList.remove('active'), 500);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const introScreen = document.getElementById("introScreen");
-  const gameContainer = document.getElementById("gameContainer");
-  const startGameBtn = document.getElementById("startGameBtn");
-
-  startGameBtn.addEventListener("click", () => {
-    introScreen.style.display = "none";
-    gameContainer.style.display = "flex";
-  });
-});
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const introLines = [
     "> Initializing Cyber Arena...",
@@ -114,10 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "> Boot Complete. Welcome, Player.",
   ];
 
-  const consoleBox = document.getElementById("consoleBox");
-  const startGameBtn = document.getElementById("startGameBtn");
-  const gameContainer = document.getElementById("gameContainer");
   const introScreen = document.getElementById("introScreen");
+  const gameContainer = document.getElementById("gameContainer");
+  const startGameBtn = document.getElementById("startGameBtn");
+  const consoleBox = document.getElementById("consoleBox");
 
   let lineIndex = 0;
   let charIndex = 0;
@@ -144,5 +120,24 @@ document.addEventListener("DOMContentLoaded", () => {
   startGameBtn.addEventListener("click", () => {
     introScreen.style.display = "none";
     gameContainer.style.display = "flex";
+    resetGame(); // Ensure a fresh start
+  });
+
+  playAgainBtn.addEventListener('click', resetGame);
+
+  document.querySelectorAll('.choice').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const symbol = btn.innerText;
+      const playerChoice =
+        symbol === "🪨" ? "rock" :
+        symbol === "📄" ? "paper" :
+        symbol === "✂️" ? "scissors" : "";
+
+      if (playerChoice) {
+        playRound(playerChoice);
+        btn.classList.add('active');
+        setTimeout(() => btn.classList.remove('active'), 500);
+      }
+    });
   });
 });
