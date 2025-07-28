@@ -45,24 +45,32 @@ function playRound(playerChoice) {
   scoreDiv.textContent = `You: ${humanScore} | Computer: ${computerScore}`;
 
   if (round === maxRounds) {
-    displayFinalResult();
+    setTimeout(displayFinalResult, 1000); // Slight delay to show last round
   }
 }
 
 function displayFinalResult() {
+  let message = "";
+
   if (humanScore > computerScore) {
-    finalDiv.textContent = "🏆 Game Over: You won the game!";
+    message = "🏆 Game Over: You won the game!";
   } else if (humanScore < computerScore) {
-    finalDiv.textContent = "💀 Game Over: You lost the game.";
+    message = "💀 Game Over: You lost the game.";
   } else {
-    finalDiv.textContent = "🤝 Game Over: It's a draw!";
+    message = "🤝 Game Over: It's a draw!";
   }
 
+  finalDiv.textContent = message;
+  finalDiv.style.display = "block";
+  finalDiv.classList.add("highlight"); // Optional class for animation or glow
+
+  // Disable buttons
   document.querySelectorAll('.choice').forEach(btn => {
     btn.disabled = true;
     btn.style.opacity = 0.5;
   });
 
+  // Show "Play Again" button
   playAgainBtn.style.display = "inline-block";
 }
 
@@ -74,6 +82,9 @@ function resetGame() {
   resultDiv.textContent = "Choose to start!";
   scoreDiv.textContent = `You: 0 | Computer: 0`;
   finalDiv.textContent = "";
+  finalDiv.style.display = "none";
+  finalDiv.classList.remove("highlight");
+
   playAgainBtn.style.display = "none";
 
   document.querySelectorAll('.choice').forEach(btn => {
@@ -120,18 +131,20 @@ document.addEventListener("DOMContentLoaded", () => {
   startGameBtn.addEventListener("click", () => {
     introScreen.style.display = "none";
     gameContainer.style.display = "flex";
-    resetGame(); // Ensure a fresh start
+    resetGame();
   });
 
   playAgainBtn.addEventListener('click', resetGame);
 
   document.querySelectorAll('.choice').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (round >= maxRounds) return;
+
       const symbol = btn.innerText;
       const playerChoice =
-        symbol === "🪨" ? "rock" :
-        symbol === "📄" ? "paper" :
-        symbol === "✂️" ? "scissors" : "";
+        symbol.includes("🪨") ? "rock" :
+        symbol.includes("📄") ? "paper" :
+        symbol.includes("✂️") ? "scissors" : "";
 
       if (playerChoice) {
         playRound(playerChoice);
