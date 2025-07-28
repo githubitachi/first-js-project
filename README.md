@@ -52,6 +52,8 @@ To run the game locally:
 ```bash
 git clone https://github.com/yourusername/cyberpunk-rps-game.git
 cd cyberpunk-rps-game
-![alt text](image.png)!
-[alt text](image-1.png)
+
 ```
+
+![Alt Text 1](image.png)
+![Alt Text 2](image-1.png)
