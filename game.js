@@ -93,3 +93,56 @@ if (clickedBtn) {
   clickedBtn.classList.add('active');
   setTimeout(() => clickedBtn.classList.remove('active'), 500);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const introScreen = document.getElementById("introScreen");
+  const gameContainer = document.getElementById("gameContainer");
+  const startGameBtn = document.getElementById("startGameBtn");
+
+  startGameBtn.addEventListener("click", () => {
+    introScreen.style.display = "none";
+    gameContainer.style.display = "flex";
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const introLines = [
+    "> Initializing Cyber Arena...",
+    "> Loading neural link...",
+    "> Syncing with Reality Matrix...",
+    "> Boot Complete. Welcome, Player.",
+  ];
+
+  const consoleBox = document.getElementById("consoleBox");
+  const startGameBtn = document.getElementById("startGameBtn");
+  const gameContainer = document.getElementById("gameContainer");
+  const introScreen = document.getElementById("introScreen");
+
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  function typeLine() {
+    if (lineIndex < introLines.length) {
+      if (charIndex < introLines[lineIndex].length) {
+        consoleBox.innerHTML += introLines[lineIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLine, 30);
+      } else {
+        consoleBox.innerHTML += "<br/>";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeLine, 500);
+      }
+    } else {
+      startGameBtn.style.display = "inline-block";
+    }
+  }
+
+  typeLine();
+
+  startGameBtn.addEventListener("click", () => {
+    introScreen.style.display = "none";
+    gameContainer.style.display = "flex";
+  });
+});
