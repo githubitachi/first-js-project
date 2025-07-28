@@ -83,6 +83,4 @@ function resetGame() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  playAgainBtn.addEventListener('click', resetGame);
-});
+playAgainBtn.addEventListener('click', resetGame);
