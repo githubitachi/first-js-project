@@ -6,7 +6,20 @@
   <title>Rock Paper Scissors Game</title>
 </head>
 <body>
-  <h1>Open the Console to Play Rock-Paper-Scissors</h1>
+  <h1>Rock Paper Scissors</h1>
+  <div class="choices">
+    <button class="choice" onclick="playRound('rock')">✊</button>
+    <button class="choice" onclick="playRound('paper')">🖐️</button>
+    <button class="choice" onclick="playRound('scissors')">✌️</button>
+  </div>
+  <div class="result" id="result">Choose to start!</div>
+  <div class="score" id="score">You: 0 | Computer: 0</div>
+  <div class="final" id="final"></div>
+
+  <audio id="winSound" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
+  <audio id="loseSound" src="https://www.soundjay.com/button/sounds/beep-07.mp3"></audio>
+  <audio id="tieSound" src="https://www.soundjay.com/button/sounds/beep-10.mp3"></audio>
+
   <script src="game.js"></script>
 </body>
 </html>
