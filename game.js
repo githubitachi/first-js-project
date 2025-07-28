@@ -84,3 +84,12 @@ function resetGame() {
 }
 
 playAgainBtn.addEventListener('click', resetGame);
+
+document.querySelectorAll('.choice').forEach(btn => {
+  btn.classList.remove('active');
+});
+const clickedBtn = [...document.querySelectorAll('.choice')].find(btn => btn.innerText.includes(playerChoice[0].toUpperCase()));
+if (clickedBtn) {
+  clickedBtn.classList.add('active');
+  setTimeout(() => clickedBtn.classList.remove('active'), 500);
+}
