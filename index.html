@@ -6,40 +6,37 @@
   <title>Rock Paper Scissors Game</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-
-
 </head>
 <body>
+  <!-- Intro Screen -->
   <div id="introScreen">
     <div class="console-box" id="consoleBox"></div>
-
     <button id="startGameBtn">[ ENTER ARENA ]</button>
   </div>
 
+  <!-- Game Screen -->
   <div id="gameContainer" style="display: none;">
     <h1>Cyberpunk RPS</h1>
+    
     <div class="choices">
       <button class="choice">🪨</button>
       <button class="choice">📄</button>
       <button class="choice">✂️</button>
     </div>
-    <div class="result"></div>
-    <div class="score"></div>
-    <div class="final"></div>
+    
+    <div id="result" class="result"></div>
+    <div id="score" class="score"></div>
+    <div id="final" class="final"></div>
+
     <button id="playAgain">Play Again</button>
   </div>
 
+  <!-- Sound Effects -->
   <audio id="winSound" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
   <audio id="loseSound" src="https://www.soundjay.com/button/sounds/beep-07.mp3"></audio>
   <audio id="tieSound" src="https://www.soundjay.com/button/sounds/beep-10.mp3"></audio>
 
-<button id="playAgain" style="display:none; padding: 1rem 2rem; font-size: 1.2rem; margin-top: 1rem; background-color: #f39c12; border: none; border-radius: 10px; cursor: pointer;">
-  Play Again
-</button>
-
+  <!-- Game Script -->
   <script src="game.js"></script>
-
-
-
 </body>
 </html>

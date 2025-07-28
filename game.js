@@ -25,27 +25,27 @@ function playRound(playerChoice) {
 
   if (playerChoice === computerChoice) {
     resultMessage = `🤝 It's a tie! You both chose ${playerChoice}`;
-    tieSound.play();
+    tieSound?.play();
   } else if (
     (playerChoice === 'rock' && computerChoice === 'scissors') ||
     (playerChoice === 'paper' && computerChoice === 'rock') ||
     (playerChoice === 'scissors' && computerChoice === 'paper')
   ) {
     humanScore++;
-    resultMessage = `🎉 You win! ${playerChoice} beats ${computerChoice}`;
-    winSound.play();
+    resultMessage = `🎉 You win this round! ${playerChoice} beats ${computerChoice}`;
+    winSound?.play();
   } else {
     computerScore++;
-    resultMessage = `😢 You lose! ${computerChoice} beats ${playerChoice}`;
-    loseSound.play();
+    resultMessage = `😢 You lose this round! ${computerChoice} beats ${playerChoice}`;
+    loseSound?.play();
   }
 
   round++;
   resultDiv.textContent = resultMessage;
-  scoreDiv.textContent = `You: ${humanScore} | Computer: ${computerScore}`;
+  scoreDiv.textContent = `Score: You ${humanScore} - ${computerScore} Computer`;
 
   if (round === maxRounds) {
-    setTimeout(displayFinalResult, 1000); // Slight delay to show last round
+    setTimeout(displayFinalResult, 1000);
   }
 }
 
@@ -62,15 +62,13 @@ function displayFinalResult() {
 
   finalDiv.textContent = message;
   finalDiv.style.display = "block";
-  finalDiv.classList.add("highlight"); // Optional class for animation or glow
+  finalDiv.classList.add("highlight");
 
-  // Disable buttons
   document.querySelectorAll('.choice').forEach(btn => {
     btn.disabled = true;
     btn.style.opacity = 0.5;
   });
 
-  // Show "Play Again" button
   playAgainBtn.style.display = "inline-block";
 }
 
@@ -80,7 +78,7 @@ function resetGame() {
   round = 0;
 
   resultDiv.textContent = "Choose to start!";
-  scoreDiv.textContent = `You: 0 | Computer: 0`;
+  scoreDiv.textContent = `Score: You 0 - 0 Computer`;
   finalDiv.textContent = "";
   finalDiv.style.display = "none";
   finalDiv.classList.remove("highlight");
