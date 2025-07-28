@@ -1,67 +1,55 @@
-// Step 4: Declare score variables
 let humanScore = 0;
 let computerScore = 0;
+let round = 0;
+const maxRounds = 5;
 
-// Step 2: Get computer choice
 function getComputerChoice() {
-  const randomNum = Math.random();
-  if (randomNum < 0.34) {
-    return "rock";
-  } else if (randomNum < 0.67) {
-    return "paper";
-  } else {
-    return "scissors";
-  }
+  const choices = ['rock', 'paper', 'scissors'];
+  return choices[Math.floor(Math.random() * 3)];
 }
 
-// Step 3: Get human choice
-function getHumanChoice() {
-  const choice = prompt("Enter rock, paper, or scissors:");
-  return choice.toLowerCase();
-}
+function playRound(humanChoice) {
+  if (round >= maxRounds) return;
 
-// Step 5: Play one round
-function playRound(humanChoice, computerChoice) {
-  humanChoice = humanChoice.toLowerCase();
+  const computerChoice = getComputerChoice();
+  let resultText = '';
+  const winSound = document.getElementById('winSound');
+  const loseSound = document.getElementById('loseSound');
+  const tieSound = document.getElementById('tieSound');
 
   if (humanChoice === computerChoice) {
-    console.log(`It's a tie! You both chose ${humanChoice}`);
+    resultText = `🤝 It's a tie! You both chose ${humanChoice}`;
+    tieSound.play();
   } else if (
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "paper" && computerChoice === "rock") ||
-    (humanChoice === "scissors" && computerChoice === "paper")
+    (humanChoice === 'rock' && computerChoice === 'scissors') ||
+    (humanChoice === 'paper' && computerChoice === 'rock') ||
+    (humanChoice === 'scissors' && computerChoice === 'paper')
   ) {
     humanScore++;
-    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+    resultText = `🎉 You win! ${humanChoice} beats ${computerChoice}`;
+    winSound.play();
   } else {
     computerScore++;
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+    resultText = `😢 You lose! ${computerChoice} beats ${humanChoice}`;
+    loseSound.play();
   }
 
-  console.log(`Score => You: ${humanScore} | Computer: ${computerScore}`);
+  round++;
+  document.getElementById('result').textContent = resultText;
+  document.getElementById('score').textContent = `You: ${humanScore} | Computer: ${computerScore}`;
+
+  if (round === maxRounds) {
+    displayFinalResult();
+  }
 }
 
-// Step 6: Play full game
-function playGame() {
-  humanScore = 0;
-  computerScore = 0;
-
-  for (let i = 1; i <= 5; i++) {
-    console.log(`\nRound ${i}`);
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
-  }
-
-  console.log("\n--- Final Result ---");
+function displayFinalResult() {
+  const final = document.getElementById('final');
   if (humanScore > computerScore) {
-    console.log("🎉 You won the game!");
+    final.textContent = "🏆 Game Over: You won the game!";
   } else if (humanScore < computerScore) {
-    console.log("😢 You lost the game.");
+    final.textContent = "💀 Game Over: You lost the game.";
   } else {
-    console.log("🤝 It's a draw!");
+    final.textContent = "🤝 Game Over: It's a draw!";
   }
 }
-
-// Start the game
-playGame();
